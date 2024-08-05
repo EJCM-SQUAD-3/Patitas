@@ -95,19 +95,19 @@ npm start
 ```
 
 ## Arquitetura
-- [Figma](https://www.figma.com/file/ZcTZ8xxIaAIXoSOWLFWezj/Untitled?type=design&node-id=0%3A1&mode=design&t=s3NL2JVMslC05Yya-1)
+- [Figma](https://www.figma.com/design/us05aUemXDfhue7Yoxio5c/Patitas---Alta-Fidelidade?t=S897FNvAHjf4G497-1)
 - [Modelagem]()
 
 ## Autores
 * Gerente: Lorenna Cunha
 * Tech-lead: Gustavo Breda
-* Back-end:
-* Back-end:
-* Back-end:
-* Back-end:
-* Front-end:
-* Front-end:
-* Front-end:
+* Back-end: Francisco Florencio
+* Back-end: Gabriela Vilar
+* Back-end: Izabel Alcantra
+* Back-end: Pedro Sampaio
+* Front-end: Natasha Alves
+* Front-end: Alex Lana
+* Front-end: Eduardo Lima
 
 <br>
 
