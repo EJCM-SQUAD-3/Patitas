@@ -75,7 +75,7 @@ A partir dos comandos abaixo, será feita a configuração da pasta `backend`:
 ``` bash
 $ cd ..
 $ cd backend
-$ npx prisma migrate dev geeklovers -- init
+$ npx prisma migrate dev patitas --init
 ```
 
 
