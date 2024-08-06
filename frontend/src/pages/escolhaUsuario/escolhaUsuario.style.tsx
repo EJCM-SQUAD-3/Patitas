@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
     Tela:{
         height:'100%',
         alignItems:'center',
-        borderWidth:2,
+       
         justifyContent:'center',
 
     },

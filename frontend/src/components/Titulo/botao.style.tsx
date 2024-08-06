@@ -24,6 +24,8 @@ export const styles = StyleSheet.create({
     texto: {
 
         color: 'white',
+        fontSize:16,
+        fontFamily:'Verdana',
     }
 
 })
