@@ -1,28 +1,26 @@
-import { StyleSheet } from "react-native";
+import styled from 'styled-components/native';
 
-export const styles = StyleSheet.create({
-    Tela:{
-        height:'100%',
-        alignItems:'center',
-       
-        justifyContent:'center',
+export const Tela = styled.View`
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+`;
 
-    },
-    GataAstro:{
-        width: 259.59,
-        height: 261.3,
-        paddingTop: 20,
-        
-    },
+export const GataAstroContainer = styled.View`
+  width: 259.59px;
+  height: 261.3px;
+  padding-top: 20px;
+`;
 
-    Quem:{
-        paddingTop: 36,
-        fontFamily:'Cherry Bomb One',
-        fontSize:40,
-        color:'#154962',
-        paddingBottom: 23,
-    }
+export const GataAstroImage = styled.Image`
+  width: 100%;
+  height: 100%;
+`;
 
-    
-
-})
+export const Quem = styled.Text`
+  padding-top: 36px;
+  font-family: 'Cherry Bomb One';
+  font-size: 40px;
+  color: #154962;
+  padding-bottom: 23px;
+`;

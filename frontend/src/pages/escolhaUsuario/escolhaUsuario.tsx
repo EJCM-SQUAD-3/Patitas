@@ -1,19 +1,18 @@
-import { Image, Text, View } from "react-native";
-import Titulo from "../../components/Titulo/titulo";
-import { styles } from "./escolhaUsuario.style";
-import Botao from "../../components/Titulo/botao";
+import React from 'react';
+import { Tela, GataAstroContainer, GataAstroImage, Quem } from './escolhaUsuario.style';
+import Titulo from '../../components/Titulo/titulo';
+import Botao from '../../components/botao/botao';
 
-export default function EscolhaUsuario(){
-
-    return(
-        <View style ={styles.Tela}>
-        <Titulo/>
-        <View style ={styles.GataAstro}>
-        <Image style ={styles.GataAstro} source={require('../../assets/gatoAstronauta.png')}/>
-        </View>
-        <Text style={styles.Quem}> Quem é você?</Text>
-        <Botao texto="Comprador"/>
-        <Botao texto="Vendedor"/>
-        </View>
-    )
+export default function EscolhaUsuario() {
+  return (
+    <Tela>
+      <Titulo />
+      <GataAstroContainer>
+        <GataAstroImage source={require('../../assets/gatoAstronauta.png')} />
+      </GataAstroContainer>
+      <Quem>Quem é você?</Quem>
+      <Botao texto="Comprador" />
+      <Botao texto="Vendedor" />
+    </Tela>
+  );
 }
