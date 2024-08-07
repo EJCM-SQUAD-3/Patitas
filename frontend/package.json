@@ -11,17 +11,19 @@
   "dependencies": {
     "@expo/webpack-config": "~19.0.1",
     "expo": "~51.0.24",
+    "expo-font": "~12.0.9",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.3",
     "react-native-web": "~0.19.6",
-    "styled-components": "^6.1.12"
+    "styled-components": "5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/preset-react": "^7.24.7",
     "@types/react": "~18.2.45",
+    "@types/styled-components-react-native": "^5.2.5",
     "typescript": "^5.1.3"
   },
   "private": true
