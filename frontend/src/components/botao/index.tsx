@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable } from 'react-native';
-import { Distancia, BotaoContainer, Texto } from './botao.style';
+import { Distancia, BotaoContainer, Texto } from './styles';
 
 type Props = {
   texto: string;

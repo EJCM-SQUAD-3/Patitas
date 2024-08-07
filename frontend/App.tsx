@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Titulo from './src/components/Titulo/titulo';
-import EscolhaUsuario from './src/pages/escolhaUsuario/escolhaUsuario';
+import Titulo from './src/components/titulo';
+import EscolhaUsuario from './src/pages/escolhaUsuario';
 import { useFonts } from 'expo-font';
 
 export default function App() {
