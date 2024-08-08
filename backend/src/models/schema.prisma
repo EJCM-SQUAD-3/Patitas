@@ -12,3 +12,115 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                Int       @id @default(autoincrement())
+  name              String
+  email             String    @unique
+  hash              String
+  salt              String
+  cpf               String    @unique
+  addresses         Address[]
+  seller            Seller?
+  order             Order[]
+  cart              Cart?
+  favorites         Favorite[]
+  sentMessages      Message[] @relation("SentMessages")
+  receivedMessages  Message[] @relation("ReceivedMessages")
+}
+
+model Address {
+  id          Int     @id @default(autoincrement())
+  number      String
+  apartament  String
+  cep         String
+  user        User @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model Seller {
+  user        User   @relation(fields: [userId], references: [id])
+  userId      Int    @id @unique
+  product     Product[]
+}
+
+model Cart {
+  user        User @relation(fields: [userId], references: [id])
+  userId      Int @id
+  totalPrice  Float 
+  quantity    Int
+  onTheCartOf ProductOnCart[]
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  product   Product[]
+}
+
+model Product {
+  id                Int       @id @default(autoincrement())
+  name              String
+  description       String
+  price             Decimal @db.Money
+  quantity          Int
+  category          Category @relation(fields: [categoryId], references: [id])
+  categoryId        Int
+  seller            Seller  @relation(fields: [sellerId], references: [userId])
+  sellerId          Int
+  onTheOrderOf      BuyItem[]
+  onTheCartOf       ProductOnCart[]
+  favoriteProducts  Favorite[]
+}
+
+model ProductOnCart {
+  quantity  Int
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  cart      Cart @relation(fields: [cartId], references: [userId])
+  cartId    Int
+
+  @@id([cartId, productId])
+}
+
+model Order {
+  id         Int          @id @default(autoincrement())
+  datetime   DateTime     @default(now())
+  status     String
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int
+  items      BuyItem[]
+  totalPrice Float
+}
+
+model BuyItem {
+  order       Order  @relation(fields: [orderId], references: [id])
+  orderId     Int
+  product     Product @relation(fields: [productId], references: [id])
+  productId   Int
+  quantity    Int
+  unitaryPrice Float
+
+  @@id([orderId, productId])
+}
+
+model Favorite {
+  buyer     User @relation(fields: [buyerId], references: [id])
+  buyerId   Int
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  @@id([buyerId, productId])
+}
+
+model Message {
+  id          Int @id @unique
+  content     String
+  sender      User @relation("SentMessages", fields: [senderId], references: [id])
+  senderId    Int 
+  receiver    User @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId  Int
+  datetime    DateTime @default(now())
+}
+
