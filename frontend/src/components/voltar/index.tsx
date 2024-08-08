@@ -10,7 +10,7 @@ export default function Voltar(){
                 
             </ConteinerImg>
             
-            <Volta> Voltar</Volta>
+            <Volta>Voltar</Volta>
         </VoltarConteiner>
 
     )

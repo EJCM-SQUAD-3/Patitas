@@ -27,5 +27,6 @@ export const Volta = styled.Text`
     font-family: 'Verdana';
     font-size: 16px;
     color: #154962;
+    padding-left: 7px;
 
 `

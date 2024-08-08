@@ -7,6 +7,7 @@ import Login from './src/pages/login';
 import CadastroComprador from './src/pages/telaCadastroComprador';
 import TelaLogo from './src/pages/telaLogo';
 import Voltar from './src/components/voltar';
+import ConteinerAzul from './src/components/conteinerAzul';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -18,7 +19,7 @@ if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
   
-    <Voltar/>
+    <ConteinerAzul textoForte='Alterar Nome de Usuário' textoFraco='Rayssa'/>
     
   );
 }
