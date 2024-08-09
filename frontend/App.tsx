@@ -5,10 +5,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
 import Login from './src/pages/login';
 
-import ConteinerAzul from './src/components/blueConteiner';
+
 import SelectUser from './src/pages/selectUser';
 import ScreenLogo from './src/pages/screenLogo';
 import ScreenRegisterBuyer from './src/pages/screenRegisterBuyer';
+import BlueConteiner from './src/components/blueConteiner';
+import UserProfile from './src/pages/userProfile';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -20,7 +22,7 @@ if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
   
-    <Login/>
+    <UserProfile/>
     
   );
 }
