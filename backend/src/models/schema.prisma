@@ -39,9 +39,10 @@ model Address {
 }
 
 model Seller {
-  user        User   @relation(fields: [userId], references: [id])
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int    @id @unique
-  product     Product[]
+  productId   Int
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model Cart {
@@ -55,7 +56,9 @@ model Cart {
 model Category {
   id        Int       @id @default(autoincrement())
   name      String    @unique
-  product   Product[]
+  userId    Int
+
+  product   Product   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Product {
@@ -64,10 +67,8 @@ model Product {
   description       String
   price             Decimal @db.Money
   quantity          Int
-  category          Category @relation(fields: [categoryId], references: [id])
-  categoryId        Int
-  seller            Seller  @relation(fields: [sellerId], references: [userId])
-  sellerId          Int
+  category          Category[]
+  seller            Seller[]
   onTheOrderOf      BuyItem[]
   onTheCartOf       ProductOnCart[]
   favoriteProducts  Favorite[]
