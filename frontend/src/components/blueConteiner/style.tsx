@@ -8,13 +8,9 @@ export const ConteinerAzulClaro = styled.View`
     justify-content: space-around;
     background-color: #99DFEB;
     border-radius: 18px;
-    shadow-color: #000000;
-  shadow-offset: {
-    width: 0px;
-    height: 10px;
-  };
-  shadow-opacity: 0.5;
-  shadow-radius: 7px;
+    shadow-color: #00000040;
+    shadow-offset: 0px 4px;
+    shadow-radius: 4px;
 
 `
 
