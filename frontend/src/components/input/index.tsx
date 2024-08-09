@@ -11,10 +11,9 @@ type Props ={
 export function Input ({imagem, placeholder,secureTextEntry}: Props){
 
     return(
-    <InputConteiner>
-        <Imagem source={imagem} alt="gatinho"/>
+    <InputConteiner hasImage={!!imagem}>
+        {imagem && <Imagem source={imagem} hasImage={!!imagem} alt="gatinho"/>}
         <InputTexto secureTextEntry={secureTextEntry} placeholder={placeholder} placeholderTextColor='#06071366'/>
-
     </InputConteiner>
     )
 }
