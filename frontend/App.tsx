@@ -4,6 +4,7 @@ import Titulo from './src/components/titulo';
 import EscolhaUsuario from './src/pages/escolhaUsuario';
 import { useFonts } from 'expo-font';
 import Login from './src/pages/login';
+import CadastroComprador from './src/pages/telaCadastroComprador';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -15,7 +16,7 @@ if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
   
-    <Login/>
+    <CadastroComprador/>
     
   );
 }
