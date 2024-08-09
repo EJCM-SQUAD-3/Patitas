@@ -3,26 +3,22 @@ import { Request, Response } from 'express';
 
 const prisma = new PrismaClient();
 
-class ProductController {
+class CategoryController {
   public async create(req: Request, res: Response) {
-    const { name, description, price, quantity, sellerId } = req.body;
+    const { name } = req.body;
     try {
-      const newProduct = await prisma.product.create({
+      const newCategory = await prisma.category.create({
         data: {
           name,
-          description,
-          price,
-          quantity, 
-          sellerId
         }
       });
       return res.status(201).json({
-        message: "Produto criado com sucesso",
-        product: newProduct,
+        message: "Categoria criado com sucesso",
+        product: newCategory,
       });
     } catch (error) {
       return res.status(500).json({
-        messageError: "Erro criando produto",
+        messageError: "Erro criando categoria",
         error
       });
     }
@@ -30,11 +26,11 @@ class ProductController {
 
   public async readAll(req: Request, res: Response) {
     try {
-      const products = await prisma.product.findMany();
-      return res.status(200).json(products);
+      const categories = await prisma.category.findMany();
+      return res.status(200).json(categories);
     } catch (error) {
       return res.status(500).json({
-        messageError: "Erro lendo produtos",
+        messageError: "Erro lendo categorias",
         error
       });
     }
@@ -43,13 +39,13 @@ class ProductController {
   public async read(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const product = await prisma.product.findUnique({
+      const category = await prisma.category.findUnique({
         where: { id: Number(id) }
       });
-      return res.status(200).json(product);
+      return res.status(200).json(category);
     } catch (error) {
       return res.status(500).json({
-        messageError: "Erro lendo produto",
+        messageError: "Erro lendo categoria",
         error
       });
     }
@@ -57,21 +53,18 @@ class ProductController {
 
   public async update(req: Request, res: Response) {
     const { id } = req.params;
-    const { name, description, price, quantity } = req.body;
+    const { name } = req.body;
     try {
-      const product = await prisma.product.update({
+      const category = await prisma.category.update({
         where: { id: Number(id) },
         data: {
           name,
-          description,
-          price,
-          quantity
         }
       });
-      return res.status(200).json(product);
+      return res.status(200).json(category);
     } catch (error) {
       return res.status(500).json({
-        messageError: "Erro atualizando produto",
+        messageError: "Erro atualizando categoria",
         error
       });
     }
@@ -80,17 +73,17 @@ class ProductController {
   public async delete(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const product = await prisma.product.delete({
+      const category = await prisma.category.delete({
         where: { id: Number(id) }
       });
-      return res.status(200).json(product);
+      return res.status(200).json(category);
     } catch (error) {
       return res.status(500).json({
-        messageError: "Erro deletando produto",
+        messageError: "Erro deletando categoria",
         error
       });
     }
   }
 
 }
-export const productController = new ProductController();
+export const categoryController = new CategoryController();
