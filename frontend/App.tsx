@@ -11,6 +11,7 @@ import ScreenLogo from './src/pages/screenLogo';
 import ScreenRegisterBuyer from './src/pages/screenRegisterBuyer';
 import BlueConteiner from './src/components/blueConteiner';
 import UserProfile from './src/pages/userProfile';
+import SellerProfile from './src/pages/sellerProfile';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,7 +23,7 @@ if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
   
-    <UserProfile/>
+    <SellerProfile/>
     
   );
 }
