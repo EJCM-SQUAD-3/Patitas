@@ -6,7 +6,7 @@ type Props = {
   texto: string;
 }
 
-export default function Botao({ texto }: Props) {
+export default function Button({ texto }: Props) {
   return (
     <Pressable>
       <Distancia>

@@ -6,7 +6,7 @@ type Props = {
   texto: string;
 }
 
-export default function BotaoLaranja({ texto }: Props) {
+export default function OrangeButton({ texto }: Props) {
   return (
     <Pressable>
       <Distancia>

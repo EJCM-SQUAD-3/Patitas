@@ -2,23 +2,24 @@ import styled from 'styled-components/native';
 
 export const Distancia = styled.View`
   padding: 5px;
+  
 `;
 
 export const BotaoContainer = styled.View`
   width: 285px;
-  height: 39px;
-  background-color: #053D58;
+  height: 49px;
+  background-color:#E97B0C;
   justify-content: center;
   align-items: center;
   border-radius: 18px;
-  shadow-color: #000000;
-  shadow-offset: { width: 0px, height: 4px };
-  shadow-opacity: 0.25;
+  shadow-color: #00000040;
+  shadow-offset: 0px 4px;
   shadow-radius: 4px;
 `;
 
 export const Texto = styled.Text`
   color: white;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 24px;
   font-family: 'Verdana';
 `;

@@ -4,6 +4,7 @@ import { userController } from "../controllers/user.controller";
 import { sellerController } from "../controllers/seller.controller";
 import { categoryController } from "../controllers/category.controller";
 
+
 const router = Router();
 
 //products
@@ -34,6 +35,19 @@ router.get("/category/:id", categoryController.read);
 router.get("/categories", categoryController.readAll);
 router.put("/category/:id", categoryController.update);
 router.delete("category/:id", categoryController.delete);
+
+
+
+//rotas usuário
+router.post('/users', userController.create);
+router.get('/users/:id', userController.getUserById);
+router.get('/users', userController.getAllUsers);
+router.put('/user/:id', userController.updateUser);
+router.delete('/users/:id', userController.deleteUser);
+router.get('/users/:id/messages', userController.getUserMessages);
+router.get('/users/:id/orders', userController.getUserOrders);
+router.get('/users/:id/cart', userController.getUserCart);
+router.get('/users/:id/favorites', userController.getUserFavorites);
 
 
 
