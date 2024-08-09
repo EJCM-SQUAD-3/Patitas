@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, PContainer, P, Atitas, Bola1, Bola2, Bola3 } from './styles';
 
-export default function TituloReduzido() {
+export default function Title() {
   return (
     <Container>
       <PContainer>

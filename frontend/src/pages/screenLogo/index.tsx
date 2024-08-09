@@ -1,13 +1,13 @@
-import TituloReduzido from "../../components/tituloReduzido";
+import SmallTitle from "../../components/smallTitle";
 import {  GradientBackground, Tela } from "./styles";
 
 
-export default function TelaLogo(){
+export default function ScreenLogo(){
 
     return(
        <GradientBackground>
         
-        <TituloReduzido/>
+        <SmallTitle/>
         </GradientBackground>
     )
 }

@@ -6,7 +6,7 @@ type Props ={
 
 }
 
-export default function ConteinerAzul ({textoForte, textoFraco}: Props){
+export default function BlueConteiner ({textoForte, textoFraco}: Props){
     return(
         <ConteinerAzulClaro>
 
@@ -16,7 +16,7 @@ export default function ConteinerAzul ({textoForte, textoFraco}: Props){
 
             <Conteiner2>
                 <TextoFraco>{textoFraco}</TextoFraco>
-                <SetaDireita source={require('../../assets/images/setaDireita.png')}/>
+                <SetaDireita source={require('../../assets/images/rightArrow.png')}/>
             </Conteiner2>
         </ConteinerAzulClaro>
 

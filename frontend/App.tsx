@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Titulo from './src/components/titulo';
-import EscolhaUsuario from './src/pages/escolhaUsuario';
+
+
 import { useFonts } from 'expo-font';
 import Login from './src/pages/login';
-import CadastroComprador from './src/pages/telaCadastroComprador';
-import TelaLogo from './src/pages/telaLogo';
-import Voltar from './src/components/voltar';
-import ConteinerAzul from './src/components/conteinerAzul';
+
+import ConteinerAzul from './src/components/blueConteiner';
+import SelectUser from './src/pages/selectUser';
+import ScreenLogo from './src/pages/screenLogo';
+import ScreenRegisterBuyer from './src/pages/screenRegisterBuyer';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,7 +20,7 @@ if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
   
-    <ConteinerAzul textoForte='Alterar Nome de Usuário' textoFraco='Rayssa'/>
+    <Login/>
     
   );
 }
