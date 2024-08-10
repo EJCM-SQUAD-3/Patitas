@@ -4,11 +4,12 @@ import { Distancia, BotaoContainer, Texto } from './styles';
 
 type Props = {
   texto: string;
+  onPress: any;
 }
 
-export default function Button({ texto }: Props) {
+export default function Button({ texto, onPress }: Props) {
   return (
-    <Pressable>
+    <Pressable onPress={onPress}>
       <Distancia>
         <BotaoContainer>
           <Texto>{texto}</Texto>

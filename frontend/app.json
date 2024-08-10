@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "src/assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "frontend",
     "splash": {
       "image": "src/assets/splash.png",
       "resizeMode": "contain",
@@ -22,9 +23,11 @@
     },
     "web": {
       "favicon": "src/assets/favicon.png"
+      
     },
     "plugins": [
       "expo-font"
+      
     ]
   }
 }
