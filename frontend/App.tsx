@@ -7,6 +7,8 @@ import { useFonts } from 'expo-font';
 import SellerProfile from './src/pages/sellerProfile';
 import { Routes } from './src/navigation';
 import SideNav from './src/components/sideNav';
+import ProductRegistration from './src/pages/productRegistration';
+import AdressRegister from './src/pages/adressRegister';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,7 +19,7 @@ export default function App() {
 if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
-    <SideNav/>
+    <AdressRegister/>
     
   );
 }
