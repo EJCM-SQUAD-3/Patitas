@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { useFonts } from 'expo-font';
 
-import ProductRegistration from './src/pages/productRegistration';
+import SellerProfile from './src/pages/sellerProfile';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -15,8 +15,7 @@ export default function App() {
 if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
-  
-    <ProductRegistration/>
+    <SellerProfile/>
     
   );
 }
