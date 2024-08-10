@@ -24,7 +24,7 @@ if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
   
-   <PurchaseCompleted/>
+   <Login/>
     
   );
 }
