@@ -20,6 +20,8 @@ export const InputTexto = styled.TextInput`
     font-family: 'Verdana';
     outline: none;
     border: none;
+    shadow-opacity: 0;
+    outline-width: 0;
     
      &:focus {
     outline: none;
