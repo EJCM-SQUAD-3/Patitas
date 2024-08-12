@@ -4,34 +4,35 @@ import { Request, Response } from 'express';
 const prisma = new PrismaClient();
 
 class OrderController {
-  public async create(req: Request, res: Response) {
-    const { userId, status, items, totalPrice } = req.body;
-    try {
-      const newOrder = await prisma.order.create({
-        data: {
-          user: { connect: { id: userId } },
-          status,
-          totalPrice,
-          items: {
-            create: items.map((item: any) => ({
-              product: { connect: { id: item.productId } },
-              quantity: item.quantity,
-              unitaryPrice: item.unitaryPrice,
-            }))
+    public async create(req: Request, res: Response) {
+      const { userId, status, items, totalPrice } = req.body;
+      try {
+        const newOrder = await prisma.order.create({
+          data: {
+            user: { connect: { id: userId } },
+            status,
+            totalPrice,
+            items: {
+              create: items.map((item: any) => ({
+                product: { connect: { id: item.productId } },
+                quantity: item.quantity,
+                unitaryPrice: item.unitaryPrice, // Inclua o unitaryPrice aqui
+              }))
+            }
           }
-        }
-      });
-      return res.status(201).json({
-        message: "Pedido criado com sucesso",
-        order: newOrder,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        messageError: "Erro criando pedido",
-        error
-      });
+        });
+        return res.status(201).json({
+          message: "Pedido criado com sucesso",
+          order: newOrder,
+        });
+      } catch (error) {
+        console.error("Erro ao criar pedido:", error);
+        return res.status(500).json({
+          messageError: "Erro criando pedido",
+        });
+      }
     }
-  }
+
 
   public async readAll(req: Request, res: Response) {
     try {
@@ -79,21 +80,14 @@ class OrderController {
 
   public async update(req: Request, res: Response) {
     const { id } = req.params;
-    const { status, items, totalPrice } = req.body;
+    const { items, status, totalPrice } = req.body;
+
     try {
       const updatedOrder = await prisma.order.update({
         where: { id: Number(id) },
         data: {
           status,
           totalPrice,
-          items: {
-            deleteMany: {}, // Remove all items before adding the updated ones
-            create: items.map((item: any) => ({
-              product: { connect: { id: item.productId } },
-              quantity: item.quantity,
-              unitaryPrice: item.unitaryPrice,
-            }))
-          }
         },
         include: {
           user: true,
@@ -104,25 +98,11 @@ class OrderController {
           }
         }
       });
+
       return res.status(200).json(updatedOrder);
     } catch (error) {
       return res.status(500).json({
         messageError: "Erro atualizando pedido",
-        error
-      });
-    }
-  }
-
-  public async delete(req: Request, res: Response) {
-    const { id } = req.params;
-    try {
-      const deletedOrder = await prisma.order.delete({
-        where: { id: Number(id) }
-      });
-      return res.status(200).json(deletedOrder);
-    } catch (error) {
-      return res.status(500).json({
-        messageError: "Erro deletando pedido",
         error
       });
     }
