@@ -44,34 +44,34 @@ class UserController {
     }
   }
 
-public async login(request: Request, response: Response) {
-  const { email, password } = request.body;
+  public async login(request: Request, response: Response) {
+    const { email, password } = request.body;
 
-  try {
-    // Verifica se o usuário existe
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    try {
+      const user = await prisma.user.findUnique({
+        where: { email: email }
+      });
 
-    if (!user) {
-      return response.status(404).json({ messageError: "Usuário não encontrado" });
+      if (!user) {
+        return response.status(400).json({ message: "Usuário não encontrado!" });
+      }
+
+      const isPasswordValid = auth.checkPassword(password, user.hash, user.salt);
+      if (!isPasswordValid) {
+        return response.status(400).json({ message: "Senha incorreta!" });
+      }
+
+      const token = auth.generateJWT(user);
+
+      return response.status(200).json({ message: "Autenticação bem-sucedida", token: token });
+
+    } catch (error) {
+      return response.status(500).json({
+        messageError: "Erro interno no servidor",
+        error,
+      });
     }
-
-    // Verifica se a senha está correta
-    const isPasswordValid = auth.checkPassword(password, user.hash, user.salt);
-    if (!isPasswordValid) {
-      return response.status(401).json({ messageError: "Senha inválida" });
-    }
-
-    return response.status(200).json({
-      message: "Login realizado com sucesso",
-      user,
-    });
-  } catch (error) {
-    return response.status(500).json({ messageError: "Erro ao fazer login", error });
   }
-}
-
   public async getUserById(request: Request, response: Response) {
     try {
       const { id } = request.params;
