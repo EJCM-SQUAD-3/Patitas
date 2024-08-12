@@ -15,15 +15,15 @@ datasource db {
 
 model User {
   id                Int       @id @default(autoincrement())
-  name              String    @db.VarChar(100)
-  email             String    @unique @db.VarChar(75)
+  name              String
+  email             String    @unique
   hash              String
   salt              String
-  cpf               String    @unique @db.VarChar(11)
+  cpf               String    @unique
   addresses         Address[]
   seller            Seller?
   order             Order[]
-  cart              Cart?
+  cart              Cart?     
   favorites         Favorite[]
   sentMessages      Message[] @relation("SentMessages")
   receivedMessages  Message[] @relation("ReceivedMessages")
@@ -123,7 +123,7 @@ model Favorite {
 }
 
 model Message {
-  id          Int @id @default(autoincrement())
+  id          Int @id @unique @default(autoincrement())
   content     String
   sender      User @relation("SentMessages", fields: [senderId], references: [id])
   senderId    Int 
@@ -131,4 +131,3 @@ model Message {
   receiverId  Int
   datetime    DateTime @default(now())
 }
-
