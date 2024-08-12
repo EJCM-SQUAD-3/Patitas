@@ -6,6 +6,7 @@ export const HeaderConteiner = styled.View`
     height: 77px;
     background-color: #154962; 
     position: fixed;
+    z-index: 500;
 
 `
 

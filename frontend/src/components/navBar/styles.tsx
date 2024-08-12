@@ -6,7 +6,7 @@ export const NavBarDiv = styled.View`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     z-index: 1000;
     background-color: #154962;
