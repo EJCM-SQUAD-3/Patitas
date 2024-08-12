@@ -11,5 +11,4 @@ node_modules/
 *.sqlite
 *.png
 *.jpg
-
 *.yml

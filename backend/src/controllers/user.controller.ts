@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client';
+import auth from "../config/auth";
 
 const prisma = new PrismaClient();
 
@@ -10,7 +11,9 @@ class UserController {
   public async create(request: Request, response: Response) {
     try {
       const result = await prisma.$transaction(async (prisma) => {
-        const { name, email, hash,salt ,cpf } = request.body;
+        const { name, email, password,cpf } = request.body;
+        const { hash, salt } = auth.generatePassword(password);
+
         const newUser = await prisma.user.create({
           data: {
             name,
@@ -29,7 +32,8 @@ class UserController {
         return response.status(201).json({ 
           message: "Usuário comprador e vendedor criado com sucesso",
           user: newUser,
-          seller: newSeller
+          seller: newSeller,
+          token: auth.generateJWT(newUser),
         });
       });
     } catch (error) {
@@ -39,6 +43,34 @@ class UserController {
       });
     }
   }
+
+public async login(request: Request, response: Response) {
+  const { email, password } = request.body;
+
+  try {
+    // Verifica se o usuário existe
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      return response.status(404).json({ messageError: "Usuário não encontrado" });
+    }
+
+    // Verifica se a senha está correta
+    const isPasswordValid = auth.checkPassword(password, user.hash, user.salt);
+    if (!isPasswordValid) {
+      return response.status(401).json({ messageError: "Senha inválida" });
+    }
+
+    return response.status(200).json({
+      message: "Login realizado com sucesso",
+      user,
+    });
+  } catch (error) {
+    return response.status(500).json({ messageError: "Erro ao fazer login", error });
+  }
+}
 
   public async getUserById(request: Request, response: Response) {
     try {
@@ -102,47 +134,54 @@ class UserController {
     }
   }
 
-  public async updateUser(request: Request, response: Response) {
+  public async update(req: Request, res: Response) {
+    const id = req.user;
+    const { name, cpf, email } = req.body;
+    console.log(id);
+
     try {
-      const { id } = request.params;
-      const { name, email, hash, salt, cpf } = request.body;
       const user = await prisma.user.update({
         where: { id: Number(id) },
+        data: { name, cpf, email },
+      });
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json({ messageError: "Error atualizando", error });
+    }
+  }
+
+  public async updatePassword(req: Request, res: Response){
+    const id = req.user;
+    const {password} = req.body;
+    const { hash, salt } = auth.generatePassword(password);
+
+    try{
+      const user = await prisma.user.update({
+        where: {id: Number(id)},
         data: {
-          name,
-          email,
           hash,
           salt,
-          cpf,
         },
       });
-      return response.status(200).json({
-        user,
-        message: "Usuário atualizado",
-      });
-    } catch (error) {
-      return response.status(400).json({ 
-        messageError: "Erro interno no servidor",
-        error: error,
-      });
+      return res.status(200).json(user);
+    }
+    catch(error){
+      return res.status(500).json({messageError: "Erro atualizando a senha", error})
     }
   }
 
-  public async deleteUser(request: Request, response: Response) {
-    const { id } = request.params;
-    try {
-      const product = await prisma.user.delete({
-        where: { id: Number(id) },
+  public async delete(request: Request, response: Response){
+    const id = request.user;
+    try{
+      const user = await prisma.user.delete({
+        where: {id: Number(id)}
       });
-
-      return response.status(200).json(product);
-    } catch (error) {
-      return response.status(500).json({ 
-        messageError: "Erro interno no servidor",
-        error: error,
-      });
+      return response.status(200).json(user);
     }
-  }
+    catch(error){
+      return response.status(500).json({error: error});
+    }
+  }  
 
   public async getUserMessages(request: Request, response: Response) {
     try {

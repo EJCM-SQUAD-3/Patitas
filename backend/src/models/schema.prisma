@@ -15,11 +15,11 @@ datasource db {
 
 model User {
   id                Int       @id @default(autoincrement())
-  name              String
-  email             String    @unique
+  name              String    @db.VarChar(100)
+  email             String    @unique @db.VarChar(75)
   hash              String
   salt              String
-  cpf               String    @unique
+  cpf               String    @unique @db.VarChar(11)
   addresses         Address[]
   seller            Seller?
   order             Order[]
@@ -40,7 +40,7 @@ model Address {
 
 model Seller {
   userId   Int    @id
-  user     User    @relation(fields: [userId], references: [id])
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   products Product[] 
 }
 

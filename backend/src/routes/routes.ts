@@ -3,6 +3,7 @@ import { productController } from "../controllers/product.controller";
 import { userController } from "../controllers/user.controller";
 import { sellerController } from "../controllers/seller.controller";
 import { categoryController } from "../controllers/category.controller";
+import passport from "passport";
 
 const router = Router();
 
@@ -15,10 +16,12 @@ router.delete("/product/:id", productController.delete);
 
 //users
 router.post('/user', userController.create);
+router.post("/login", userController.login);
 router.get('/user/:id', userController.getUserById);
 router.get('/users', userController.getAllUsers);
-router.put('/user/:id', userController.updateUser);
-router.delete('/user/:id', userController.deleteUser);
+router.put("/user/update", passport.authenticate('jwt',{session: false}), userController.update);
+router.put("/user/updatePassword", passport.authenticate('jwt', {session:false}), userController.updatePassword);
+router.delete("/user/delete", passport.authenticate('jwt', {session:false}), userController.delete); 
 router.get('/user/:id/messages', userController.getUserMessages);
 router.get('/user/:id/orders', userController.getUserOrders);
 router.get('/user/:id/cart', userController.getUserCart);
@@ -33,7 +36,7 @@ router.post("/category", categoryController.create);
 router.get("/category/:id", categoryController.read);
 router.get("/categories", categoryController.readAll);
 router.put("/category/:id", categoryController.update);
-router.delete("category/:id", categoryController.delete);
+router.delete("/category/:id", categoryController.delete);
 
 
 

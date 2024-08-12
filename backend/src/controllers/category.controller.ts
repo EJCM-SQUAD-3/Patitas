@@ -13,7 +13,7 @@ class CategoryController {
         }
       });
       return res.status(201).json({
-        message: "Categoria criado com sucesso",
+        message: "Categoria criada com sucesso",
         product: newCategory,
       });
     } catch (error) {
