@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 class ProductController {
   public async create(req: Request, res: Response) {
+    console.log(req);
     const { name, description, price, quantity, sellerId } = req.body;
     try {
       const newProduct = await prisma.product.create({

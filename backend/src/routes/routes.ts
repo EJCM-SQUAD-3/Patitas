@@ -10,12 +10,13 @@ import { favoriteController } from "../controllers/favorite.controller";
 import { orderController } from "../controllers/order.controller";
 import { productOnCartController } from "../controllers/productOnCart.controller";
 import passport from "passport";
+import { messageController } from "../controllers/message.controller";
 
 
 const router = Router();
 
 // Products
-router.post("/product", productController.create);
+router.post("/product", passport.authenticate('jwt', {session: false}), productController.create);
 router.get("/products", productController.readAll);
 router.get("/product/:id", productController.read);
 router.put("/product/:id", productController.update);
@@ -23,7 +24,7 @@ router.delete("/product/:id", productController.delete);
 
 // Users
 router.post('/user', userController.create);
-router.get("/login", userController.login);
+router.post("/login", userController.login);
 router.get('/user/:id', userController.getUserById);
 router.get('/users', userController.getAllUsers);
 router.put("/user/update", passport.authenticate('jwt', {session: false}), userController.update);
@@ -67,6 +68,9 @@ router.get("/favorite/:buyerId/:productId", favoriteController.read);
 router.delete("/favorite/:buyerId/:productId", favoriteController.delete);
 
 // Messages
+router.post("/message", messageController.create);
+router.get("/message/:id", messageController.read);
+router.delete("/message/:id", messageController.delete);
 
 // Orders
 router.post("/order", orderController.create);
