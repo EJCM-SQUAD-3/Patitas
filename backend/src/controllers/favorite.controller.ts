@@ -6,11 +6,12 @@ const prisma = new PrismaClient();
 class FavoriteController {
 
   public async create(req: Request, res: Response) {
-    const { buyerId, productId } = req.body;
+    const { productId } = req.body;
+    const idUser = req.user;
 
     try {
       const newFavorite = await prisma.favorite.create({
-        data: { buyerId, productId }
+        data: { buyer: {connect:{id:idUser}}, product: {connect:{id:productId}} }
       });
       return res.status(201).json(newFavorite);
     } catch (error) {

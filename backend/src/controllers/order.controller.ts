@@ -5,11 +5,12 @@ const prisma = new PrismaClient();
 
 class OrderController {
     public async create(req: Request, res: Response) {
-      const { userId, status, items, totalPrice } = req.body;
+      const { status, items, totalPrice } = req.body;
+      const idUser = req.user;
       try {
         const newOrder = await prisma.order.create({
           data: {
-            user: { connect: { id: userId } },
+            user: { connect: { id: idUser } },
             status,
             totalPrice,
             items: {
@@ -80,11 +81,12 @@ class OrderController {
 
   public async update(req: Request, res: Response) {
     const { id } = req.params;
+    const idUser = req.user;
     const { items, status, totalPrice } = req.body;
 
     try {
       const updatedOrder = await prisma.order.update({
-        where: { id: Number(id) },
+        where: { id: Number(id), userId: idUser },
         data: {
           status,
           totalPrice,
