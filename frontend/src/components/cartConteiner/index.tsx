@@ -34,7 +34,7 @@ export default function CartConteiner({description, preco, imagem}: Props){
                 <UpSideConteiner>
                     <Description>{description}</Description>
                     <Pressable onPress={mudar}>
-                    <HeartImage source={fullHeart ? require('../../assets/images/emptyHeartIcon.png'): require('../../assets/images/fullHeartIcon.png')}/>
+                    <HeartImage source={fullHeart ? require('../../assets/images/unfilledHeart.png'): require('../../assets/images/filledHeart.png')}/>
                     </Pressable>
                 </UpSideConteiner>
                 <BottomSideConteiner>
