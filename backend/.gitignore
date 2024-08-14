@@ -1,8 +1,7 @@
-# private rsa key
-id_rsa_priv.pem
-
 # dependencies
 node_modules/
+
+src/models/migrations/
 
 .DS_Store
 .idea
@@ -12,3 +11,4 @@ node_modules/
 *.png
 *.jpg
 *.yml
+*.pem

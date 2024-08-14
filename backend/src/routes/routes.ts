@@ -13,6 +13,9 @@ import passport from "passport";
 import { messageController } from "../controllers/message.controller";
 import { Validator } from "../config/validator";
 import { ValidationMiddleware } from "../middlewares/validator.middleware";
+import { photoUpload } from "../config/uploader";
+import { uploadPhoto } from "../controllers/upload.controller";
+import { validatePhotoUpload } from "../middlewares/uploadValidator.middleware";
 
 const router = Router();
 
@@ -31,6 +34,7 @@ router.get('/users', userController.getAllUsers);
 router.put("/user/update", Validator.validateUser("update"), ValidationMiddleware.validateResult,passport.authenticate('jwt', {session: false}), userController.update);
 router.put("/user/updatePassword", Validator.validateUser("updatePassword"), ValidationMiddleware.validateResult, passport.authenticate('jwt', {session:false}), userController.updatePassword);
 router.delete("/user/delete", passport.authenticate('jwt', {session:false}), userController.delete); 
+router.post("/user/profile/image", photoUpload.single("image"))
 router.get('/user/:id/messages', userController.getUserMessages);
 router.get('/user/:id/orders', userController.getUserOrders);
 router.get('/user/:id/cart', userController.getUserCart);
@@ -81,6 +85,9 @@ router.put("/order/:id", Validator.validateOrder("update"), ValidationMiddleware
 // Products on Cart
 router.post("/product-on-cart", Validator.validateProductOnCart("create"), ValidationMiddleware.validateResult, productOnCartController.create);
 router.delete("/product-on-cart/:cartId/:productId", Validator.validateProductOnCart("delete"), ValidationMiddleware.validateResult, productOnCartController.delete);
+
+// Uploads
+router.post('/upload/photo', photoUpload.single("image"), validatePhotoUpload, ValidationMiddleware.validateResult);
 
 export default router;
 
