@@ -7,7 +7,7 @@ import { BackConteiner, Conteiners, Tela } from "./styles";
 
 
 
-export function Cart(){
+export default function Cart(){
 
     return(
 

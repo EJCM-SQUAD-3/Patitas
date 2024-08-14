@@ -10,7 +10,9 @@ import SideNav from './src/components/sideNav';
 import ProductRegistration from './src/pages/productRegistration';
 import AdressRegister from './src/pages/adressRegister';
 import CartConteiner from './src/components/cartConteiner';
-import { Cart } from './src/pages/cart';
+import Cart from './src/pages/cart';
+import ScreenRegisterBuyer from './src/pages/screenRegisterBuyer';
+import SelectUser from './src/pages/selectUser';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,7 +23,7 @@ export default function App() {
 if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
-    <Cart/>
+ <ProductRegistration/>
     
   );
 }
