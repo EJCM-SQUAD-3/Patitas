@@ -5,8 +5,8 @@ const prisma = new PrismaClient();
 
 class ProductController {
   public async create(req: Request, res: Response) {
-    console.log(req);
-    const { name, description, price, quantity, sellerId } = req.body;
+    const { name, description, price, quantity } = req.body;
+    const sellerId = req.user;
     try {
       const newProduct = await prisma.product.create({
         data: {
@@ -14,8 +14,8 @@ class ProductController {
           description,
           price,
           quantity, 
-          sellerId
-        }
+          seller: { connect: { userId:sellerId } }
+        },
       });
       return res.status(201).json({
         message: "Produto criado com sucesso",
@@ -58,10 +58,11 @@ class ProductController {
 
   public async update(req: Request, res: Response) {
     const { id } = req.params;
+    const idUser = req.user;
     const { name, description, price, quantity } = req.body;
     try {
       const product = await prisma.product.update({
-        where: { id: Number(id) },
+        where: { id: Number(id), sellerId: idUser },
         data: {
           name,
           description,
@@ -80,9 +81,13 @@ class ProductController {
 
   public async delete(req: Request, res: Response) {
     const { id } = req.params;
+    const idUser = req.user;
     try {
       const product = await prisma.product.delete({
-        where: { id: Number(id) }
+        where: { 
+          id: Number(id),
+          sellerId: idUser
+        }
       });
       return res.status(200).json(product);
     } catch (error) {

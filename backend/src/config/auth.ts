@@ -32,7 +32,7 @@ const generateJWT = (user: any) => {
   };
 
   const jwt = jsonwebtoken.sign(payload, PRIV_KEY, {
-    expiresIn: '1m',
+    expiresIn: '7d',
     algorithm: "RS256",
   });
   return jwt;
