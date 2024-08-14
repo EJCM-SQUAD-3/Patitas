@@ -1,8 +1,8 @@
-import BotaoLaranja from "../../components/botaoLaranja";
+
 import { Input } from "../../components/input";
-import Titulo from "../../components/titulo";
-import TituloReduzido from "../../components/tituloReduzido";
 import { Esqueceu, Inputs, InputTitleLogin, InputTitleSenha, Patas, Tela, TitleConteiner } from "./styles";
+import SmallTitle from "../../components/smallTitle";
+import OrangeButton from "../../components/orangeButton";
 
 
 
@@ -11,21 +11,21 @@ export default function Login(){
     return(
         <Tela>
             
-            <TituloReduzido/>
-            <Patas source={require('../../assets/images/patas.png')}/>
+            <SmallTitle/>
+            <Patas source={require('../../assets/images/paws.png')}/>
             <InputTitleLogin>Login</InputTitleLogin>
             <Inputs>
                 
-                <Input secureTextEntry={false} imagem={require('../../assets/images/gatinho.png')} placeholder="Digite seu ..."/>
+                <Input secureTextEntry={false} imagem={require('../../assets/images/smallCat.png')} placeholder="Digite seu ..."/>
             </Inputs>
             <InputTitleSenha>Senha</InputTitleSenha>
             <Inputs>
                 
-                <Input secureTextEntry={true} imagem={require('../../assets/images/cadeado.png')} placeholder="Digite seu ..."/>
+                <Input secureTextEntry={true} imagem={require('../../assets/images/lock.png')} placeholder="Digite seu ..."/>
             </Inputs>
             <Esqueceu> Esqueceu sua senha?</Esqueceu>
-            <BotaoLaranja texto="Entrar"/>
-            <BotaoLaranja texto="Cadastrar"/>
+            <OrangeButton texto="Entrar"/>
+            <OrangeButton texto="Cadastrar"/>
                 
         </Tela>
 

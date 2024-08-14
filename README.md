@@ -104,7 +104,6 @@ npm start
 * Back-end: Francisco Florencio
 * Back-end: Gabriela Vilar
 * Back-end: Izabel Alcantra
-* Back-end: Pedro Sampaio
 * Front-end: Natasha Alves
 * Front-end: Alex Lana
 * Front-end: Eduardo Lima

@@ -1,0 +1,23 @@
+# -------------------------------- BACKEND ----------------------------------- #
+- Autenticacao nos metodos das controllers (somente acoes que precisam de login) 
+- Seeders 
+- Terminar controllers (caso nao tenha acabado)
+
+
+(SE DER TEMPO)
+- Documentar e melhorar as mensagens de erro nas controllers
+- Multer
+- nodemailer 
+- Metodo addOne: aumenta 1 unidade 'quantity' da tabela ProductOnCart e aumenta 'price' da tabela Cart
+- Metodo removeOne: diminui 1 unidade 'quantity' da tabela ProductOnCart e diminui 'price' da tabela Cart
+- ... mais metodos se lembrarem?
+
+
+# -------------------------------- FRONTEND ---------------------------------- #
+- Home
+- React-hook-forms
+- Usar medidas responsivas
+- Usar as imagens em .svg
+- Usar menu tabNavigator
+
+- integração nao dara tempo, mas se quiser eu faço e explico

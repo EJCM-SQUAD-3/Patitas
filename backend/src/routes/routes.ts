@@ -17,6 +17,7 @@ import { photoUpload } from "../config/uploader";
 import { uploadPhoto } from "../controllers/upload.controller";
 import { validatePhotoUpload } from "../middlewares/uploadValidator.middleware";
 
+
 const router = Router();
 
 // Products
@@ -34,7 +35,6 @@ router.get('/users', userController.getAllUsers);
 router.put("/user/update", Validator.validateUser("update"), ValidationMiddleware.validateResult,passport.authenticate('jwt', {session: false}), userController.update);
 router.put("/user/updatePassword", Validator.validateUser("updatePassword"), ValidationMiddleware.validateResult, passport.authenticate('jwt', {session:false}), userController.updatePassword);
 router.delete("/user/delete", passport.authenticate('jwt', {session:false}), userController.delete); 
-router.post("/user/profile/image", photoUpload.single("image"))
 router.get('/user/:id/messages', userController.getUserMessages);
 router.get('/user/:id/orders', userController.getUserOrders);
 router.get('/user/:id/cart', userController.getUserCart);
