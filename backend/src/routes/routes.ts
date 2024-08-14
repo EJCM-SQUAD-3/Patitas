@@ -13,6 +13,9 @@ import passport from "passport";
 import { messageController } from "../controllers/message.controller";
 import { Validator } from "../config/validator";
 import { ValidationMiddleware } from "../middlewares/validator.middleware";
+import { photoUpload } from "../config/uploader";
+import { uploadPhoto } from "../controllers/upload.controller";
+import { validatePhotoUpload } from "../middlewares/uploadValidator.middleware";
 
 
 const router = Router();
@@ -83,18 +86,8 @@ router.put("/order/:id", Validator.validateOrder("update"), ValidationMiddleware
 router.post("/product-on-cart", Validator.validateProductOnCart("create"), ValidationMiddleware.validateResult, productOnCartController.create);
 router.delete("/product-on-cart/:cartId/:productId", Validator.validateProductOnCart("delete"), ValidationMiddleware.validateResult, productOnCartController.delete);
 
-//rotas usuário
-router.post('/users', userController.create);
-router.get('/users/:id', userController.getUserById);
-router.get('/users', userController.getAllUsers);
-router.put('/user/:id', userController.updateUser);
-router.delete('/users/:id', userController.deleteUser);
-router.get('/users/:id/messages', userController.getUserMessages);
-router.get('/users/:id/orders', userController.getUserOrders);
-router.get('/users/:id/cart', userController.getUserCart);
-router.get('/users/:id/favorites', userController.getUserFavorites);
-
-
+// Uploads
+router.post('/upload/photo', photoUpload.single("image"), validatePhotoUpload, ValidationMiddleware.validateResult);
 
 export default router;
 
