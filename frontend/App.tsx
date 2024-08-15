@@ -23,7 +23,7 @@ export default function App() {
 if(!fontsLoaded) return(<Text>Erro ao carregar as fontes.</Text>);
   return (
     
- <ProductRegistration/>
+<Cart/>
     
   );
 }
