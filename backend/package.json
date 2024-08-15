@@ -8,7 +8,8 @@
     "keys": "npx ts-node src/config/generateKeysPair.ts"
   },
   "prisma": {
-    "schema": "src/models/schema.prisma"
+    "schema": "src/models/schema.prisma",
+    "seed": "ts-node src/models/seeder.ts"
   },
   "[prisma]": {
     "editor.formatOnSave": true
