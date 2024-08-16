@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client';
+import auth from "../config/auth";
 
 const prisma = new PrismaClient();
 
@@ -9,20 +10,31 @@ class UserController {
   
   public async create(request: Request, response: Response) {
     try {
-      const { name, email, hash,salt ,cpf } = request.body;
-      const newUser = await prisma.user.create({
-        data: {
-          name,
-          email,
-          hash,
-          salt,
-          cpf,
-        },
-      });
-       console.log(newUser)
-      return response.status(201).json({ 
-        message: "Usuário criado com sucesso",
-        user: newUser,
+      const result = await prisma.$transaction(async (prisma) => {
+        const { name, email, password,cpf } = request.body;
+        const { hash, salt } = auth.generatePassword(password);
+
+        const newUser = await prisma.user.create({
+          data: {
+            name,
+            email,
+            hash,
+            salt,
+            cpf,
+          },
+        });
+        const userId = newUser.id;
+        const newSeller = await prisma.seller.create({
+          data:{
+            userId
+          }
+        });
+        return response.status(201).json({ 
+          message: "Usuário comprador e vendedor criado com sucesso",
+          user: newUser,
+          seller: newSeller,
+          token: auth.generateJWT(newUser),
+        });
       });
     } catch (error) {
       return response.status(500).json({
