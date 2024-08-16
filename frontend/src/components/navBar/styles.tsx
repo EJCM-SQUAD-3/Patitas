@@ -12,7 +12,7 @@ export const NavBarDiv = styled.View`
     background-color: #154962;
 `;
 
-export const IconDiv = styled.View`
+export const IconDiv = styled.Pressable`
     color: white;
     flex: 1;
     align-items: center;

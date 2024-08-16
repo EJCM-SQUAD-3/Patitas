@@ -8,7 +8,7 @@ export const Tela = styled.View`
 
 export const GataAstroContainer = styled.View`
   width: 259.59px;
-  height: 261.3px;
+  height: 280.3px;
   padding-top: 20px;
 `;
 

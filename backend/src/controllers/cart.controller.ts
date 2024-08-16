@@ -7,10 +7,11 @@ class CartController {
 
   public async create(req: Request, res: Response) {
     const { userId, totalPrice, quantity } = req.body;
+    const idUser = req.user;
 
     try {
       const newCart = await prisma.cart.create({
-        data: { userId, totalPrice, quantity }
+        data: { userId, totalPrice, quantity, user: {connect:{id:idUser}}}
       });
       return res.status(201).json(newCart);
     } catch (error) {
@@ -33,10 +34,10 @@ class CartController {
   }
 
   public async delete(req: Request, res: Response) {
-    const { userId } = req.params;
+    const idUser = req.user;
 
     try {
-      await prisma.cart.delete({ where: { userId: Number(userId) } });
+      await prisma.cart.delete({ where: { userId: idUser  } });
       return res.status(200).json({ message: "Carrinho deletado com sucesso" });
     } catch (error) {
       return res.status(500).json({ messageError: "Erro deletando carrinho", error });

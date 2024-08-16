@@ -5,6 +5,7 @@ import { sendEmail } from "../config/mailer";
 const prisma = new PrismaClient();
 
 class OrderController {
+
   public async create(req: Request, res: Response) {
     const { userId, status, items, totalPrice } = req.body;
     try {
@@ -19,6 +20,24 @@ class OrderController {
               quantity: item.quantity,
               unitaryPrice: item.unitaryPrice,
             }))
+=======
+    public async create(req: Request, res: Response) {
+      const { status, items, totalPrice } = req.body;
+      const idUser = req.user;
+      try {
+        const newOrder = await prisma.order.create({
+          data: {
+            user: { connect: { id: idUser } },
+            status,
+            totalPrice,
+            items: {
+              create: items.map((item: any) => ({
+                product: { connect: { id: item.productId } },
+                quantity: item.quantity,
+                unitaryPrice: item.unitaryPrice, 
+              }))
+            }
+
           }
         }
       });
@@ -92,11 +111,12 @@ class OrderController {
 
   public async update(req: Request, res: Response) {
     const { id } = req.params;
+    const idUser = req.user;
     const { items, status, totalPrice } = req.body;
 
     try {
       const updatedOrder = await prisma.order.update({
-        where: { id: Number(id) },
+        where: { id: Number(id), userId: idUser },
         data: {
           status,
           totalPrice,
