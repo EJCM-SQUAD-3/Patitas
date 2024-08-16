@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 export const Tela = styled.View`
     
     align-items:center;
-    height: 1026px;
+    height: 1100px;
     flex-direction:column;
 `
 

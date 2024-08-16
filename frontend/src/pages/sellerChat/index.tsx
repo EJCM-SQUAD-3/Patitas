@@ -1,11 +1,12 @@
-import Back from "../../components/back";
+import ReturnButton from "../../components/returnButton";
+import Back from "../../components/returnButton";
 import { TitleContainer, Title, BackContainer, MainDiv, ProfileImage, UserName, Icon, ChatDiv, Underline } from "./style";
 
 export default function SellerChat() {
   return (
     <MainDiv>
       <BackContainer>
-        <Back />
+        <ReturnButton />
         <TitleContainer>
           <Title>Fale com o vendedor</Title>
           <Underline/>

@@ -8,8 +8,10 @@ export const BackConteiner = styled.View`
 
 `
 export const Tela = styled.View`
+    flex:1;
     flex-direction: column;
     align-items: center;
+    background-color: #F2F3F3;
 
 `
 
