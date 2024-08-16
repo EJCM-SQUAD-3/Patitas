@@ -95,7 +95,8 @@ class OrderController {
         const itemsList = order.items.map(item => 
           `Produto: ${item.product.name}\nQuantidade: ${item.quantity}\nPreço Unitário: ${item.unitaryPrice}\n`
         ).join('\n');
-        const messageText = `Seu pedido foi criado com sucesso!\n\nDetalhes do Pedido:\nTotal: ${order.totalPrice}\nItens:\n${itemsList}\n Patitas`;
+        const messageText = `Seu pedido foi criado com sucesso!\n\nDetalhes do Pedido:
+        \nTotal: ${order.totalPrice}\nItens:\n${itemsList}\n Patitas`;
 
         await sendEmail(emailToBeSendedTo, subject, messageText);
       }
