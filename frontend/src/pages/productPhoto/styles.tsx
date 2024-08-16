@@ -2,16 +2,13 @@ import styled from "styled-components/native";
 
 export const Page = styled.View`
     width: 100%;
-    height: 75%;
+    height: 100%;
     margin:0;
+    padding:24px;
     display: flex;
-    flex-direction:column;  
-`;
-
-export const ButtonBackContainer = styled.View`
-   padding-top:24px;
-   padding-left:24px;
-`;
+    flex-direction:column;
+    
+`
 
 export const PageContentContainer = styled.View`
     width: 100%;
@@ -19,8 +16,8 @@ export const PageContentContainer = styled.View`
     display: flex;
     flex-direction:column;
     align-items: center;
-    justify-content: space-between;
-`;
+`
+
 
 export const TitleAddPhoto = styled.Text`
     color:#154962;
@@ -28,13 +25,8 @@ export const TitleAddPhoto = styled.Text`
     font-weight: 700;
     font-size: 16px;
     line-height: 20px;
-    margin: 40px 0px 200px 0px;
-`;
+    margin: 20px 0px;
+`
 
-export const FooterContainer = styled.View`
-    width: 100%;
-    height: 62px;
-    bottom: 0;
-`;
 
 

@@ -1,7 +1,8 @@
 import { Input } from "../../components/input";
 import { BackContainer, ButtonContainer, FormDiv, FormTitle, InputDiv, NewProduct } from "./style";
 import OrangeButton from "../../components/orangeButton";
-import Back from "../../components/back";
+import Back from "../../components/returnButton";
+import ReturnButton from "../../components/returnButton";
 
 
 export default function ProductRegistration(){
@@ -9,22 +10,22 @@ export default function ProductRegistration(){
         <NewProduct>
             <FormDiv>
                 <BackContainer>
-                    <Back/>
+                    <ReturnButton/>
                 </BackContainer>
 
                 <FormTitle>Novo Produto</FormTitle>
 
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Nome  Produto"/>
+                    <Input secureTextEntry={false} placeholder="Nome  Produto" value={''} onChangeText={'nada'}/>
                 </InputDiv>
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Valor do Produto"/>
+                    <Input secureTextEntry={false} placeholder="Valor do Produto" value={''} onChangeText={'nada'}/>
                 </InputDiv>
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Descrição"/>
+                    <Input secureTextEntry={false} placeholder="Descrição" value={''} onChangeText={'nada'}/>
                 </InputDiv>
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Categoria do Produto"/>
+                    <Input secureTextEntry={false} placeholder="Categoria do Produto" value={''} onChangeText={'nada'}/>
                 </InputDiv>
                 
                 <ButtonContainer>

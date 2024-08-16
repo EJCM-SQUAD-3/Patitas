@@ -11,7 +11,6 @@ export const SideNavigator = styled.View`
     background-color: #99DFEB;
     border-radius: 18px;
     margin-left: 170px;
-    z-index: 1000;
     
 
 `

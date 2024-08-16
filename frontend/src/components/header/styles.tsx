@@ -1,8 +1,8 @@
 import styled from "styled-components/native";
 
-export const HeaderConteiner = styled.Pressable`
+export const HeaderConteiner = styled.View`
 
-    width: 390px;
+    width: 100%;
     height: 77px;
     background-color: #154962; 
     position: fixed;

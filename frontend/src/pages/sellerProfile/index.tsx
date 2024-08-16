@@ -1,6 +1,7 @@
-import Back from "../../components/back";
+import Back from "../../components/returnButton";
 import BlueConteiner from "../../components/blueConteiner";
 import { BackConteiner, Config, Conteiners, ImagemPessoa, Tela } from "./style";
+import ReturnButton from "../../components/returnButton";
 
 
 export default function SellerProfile(){
@@ -8,7 +9,7 @@ export default function SellerProfile(){
     return(
         <Tela>
             <BackConteiner>
-                <Back/>
+                <ReturnButton/>
             </BackConteiner>
 
             <ImagemPessoa source={require('../../assets/images/rayssa.png')}/>

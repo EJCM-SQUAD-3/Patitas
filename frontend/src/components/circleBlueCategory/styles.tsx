@@ -15,10 +15,10 @@ export const BlueContainer = styled.View`
     border-radius: 50%;
     background-color: #154962;
     margin-bottom: 10px;
+    align-items: center;
+    justify-content:center;
     z-index: 1;
-   display: flex;
-   align-items:center;
-   justify-content: center;
+   
 `
 
 export const Texto = styled.Text`
@@ -30,8 +30,8 @@ export const Texto = styled.Text`
   
 `
 export const Imagem = styled.Image`
-   min-width: 80px;
-    min-height: 80px;
-    object-fit: contain;
-   
- `
+   width: 80px;
+   height: 80px;
+   object-fit: contain;
+  
+`
