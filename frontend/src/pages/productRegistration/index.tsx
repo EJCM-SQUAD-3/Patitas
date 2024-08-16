@@ -1,37 +1,81 @@
+import { useState } from "react";
 import { Input } from "../../components/input";
 import { BackContainer, ButtonContainer, FormDiv, FormTitle, InputDiv, NewProduct } from "./style";
 import OrangeButton from "../../components/orangeButton";
-import Back from "../../components/returnButton";
 import ReturnButton from "../../components/returnButton";
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
+import NavBar2 from "../../components/navbar2";
 
+export default function ProductRegistration() {
+    const navigation = useNavigation();
 
-export default function ProductRegistration(){
-    return(
+    // Estados para armazenar os valores dos inputs
+    const [productName, setProductName] = useState('');
+    const [productValue, setProductValue] = useState('');
+    const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+
+    return (
         <NewProduct>
             <FormDiv>
-                <BackContainer>
-                    <ReturnButton/>
-                </BackContainer>
+                <Pressable 
+                    onPress={() => navigation.navigate('SellerProfile')} 
+                    style={{ paddingRight: 276 }}  
+                >
+                    <BackContainer>
+                        <ReturnButton />
+                    </BackContainer>
+                </Pressable>
 
                 <FormTitle>Novo Produto</FormTitle>
 
+                {/* Inputs para os dados do produto */}
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Nome  Produto" value={''} onChangeText={'nada'}/>
+                    <Input 
+                        secureTextEntry={false} 
+                        placeholder="Nome do Produto" 
+                        value={productName} 
+                        onChangeText={setProductName}  // Atualiza o nome do produto
+                    />
                 </InputDiv>
+
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Valor do Produto" value={''} onChangeText={'nada'}/>
+                    <Input 
+                        secureTextEntry={false} 
+                        placeholder="Valor do Produto" 
+                        value={productValue} 
+                        onChangeText={setProductValue}  // Atualiza o valor do produto
+                    />
                 </InputDiv>
+
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Descrição" value={''} onChangeText={'nada'}/>
+                    <Input 
+                        secureTextEntry={false} 
+                        placeholder="Descrição" 
+                        value={description} 
+                        onChangeText={setDescription}  // Atualiza a descrição
+                    />
                 </InputDiv>
+
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Categoria do Produto" value={''} onChangeText={'nada'}/>
+                    <Input 
+                        secureTextEntry={false} 
+                        placeholder="Categoria do Produto" 
+                        value={category} 
+                        onChangeText={setCategory}  // Atualiza a categoria do produto
+                    />
                 </InputDiv>
                 
                 <ButtonContainer>
-                    <OrangeButton texto="Adicionar Foto"/>
+                    <OrangeButton 
+                        onPress={() => navigation.navigate('ProductPhoto')} 
+                        texto="Adicionar Foto"
+                    />
                 </ButtonContainer>
             </FormDiv>
+
+            <NavBar2 activeIcon={'home'} />
         </NewProduct>
-    )
+    );
 }

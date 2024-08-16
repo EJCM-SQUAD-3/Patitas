@@ -43,4 +43,5 @@ export const ButtonContainer = styled.div`
     justify-content: center;
     position: fixed;
     bottom: 60px;
+    padding-bottom: 50px;
 `;

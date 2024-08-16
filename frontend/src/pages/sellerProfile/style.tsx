@@ -32,7 +32,7 @@ export const Config = styled.Text`
     font-size: 16px;
 `
 export const Conteiners = styled.View`
-    flex: 1;
+    height: 460px;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;

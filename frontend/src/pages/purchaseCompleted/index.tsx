@@ -10,7 +10,7 @@ const navigation = useNavigation()
             <Header/>
             <Conteiner>
                 <Doguinho source={require('../../assets/images/Dogpaw.png')}/>
-                <Pressable onPress={()=> navigation.navigate('CHome') }>
+                <Pressable onPress={()=> navigation.navigate('Home') }>
                 <Buy>
                     <Texto>Compra finalizada com sucesso</Texto>
                 </Buy>
