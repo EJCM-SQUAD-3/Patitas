@@ -15,16 +15,16 @@ export default function ProductRegistration(){
                 <FormTitle>Novo Produto</FormTitle>
 
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Nome  Produto" value={''} onChangeText={'nada'}/>
+                    <Input secureTextEntry={false} placeholder="Nome  Produto"/>
                 </InputDiv>
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Valor do Produto" value={''} onChangeText={'nada'}/>
+                    <Input secureTextEntry={false} placeholder="Valor do Produto"/>
                 </InputDiv>
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Descrição" value={''} onChangeText={'nada'}/>
+                    <Input secureTextEntry={false} placeholder="Descrição"/>
                 </InputDiv>
                 <InputDiv>
-                    <Input secureTextEntry={false} placeholder="Categoria do Produto" value={''} onChangeText={'nada'}/>
+                    <Input secureTextEntry={false} placeholder="Categoria do Produto"/>
                 </InputDiv>
                 
                 <ButtonContainer>

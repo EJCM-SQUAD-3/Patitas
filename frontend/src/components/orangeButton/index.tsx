@@ -4,12 +4,11 @@ import { Distancia, BotaoContainer, Texto } from './styles';
 
 type Props = {
   texto: string;
-  onPress: any;
 }
 
-export default function OrangeButton({ texto, onPress }: Props) {
+export default function OrangeButton({ texto }: Props) {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable>
       <Distancia>
         <BotaoContainer>
           <Texto>{texto}</Texto>
