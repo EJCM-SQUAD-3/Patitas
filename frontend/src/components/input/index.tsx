@@ -3,7 +3,7 @@ import { Imagem, InputConteiner, InputTexto } from "./styles";
 
 type Props ={
 
-    imagem: any;
+    imagem?: any;
     placeholder: string;
     secureTextEntry: boolean;
     value: any;

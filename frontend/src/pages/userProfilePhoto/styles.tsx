@@ -8,7 +8,7 @@ export const Page = styled.View`
     flex-direction:column;  
 `;
 
-export const ButtonBackContainer = styled.View`
+export const ButtonBackContainer = styled.Pressable`
    padding-top:24px;
    padding-left:24px;
 `;

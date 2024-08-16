@@ -4,6 +4,7 @@ import { BackConteiner, Config, Conteiners, ImagemPessoa, Tela } from "./style";
 import ReturnButton from "../../components/returnButton";
 import { useNavigation } from "@react-navigation/native";
 import { Pressable } from "react-native";
+import NavBar2 from "../../components/navbar2";
 
 export default function SellerProfile(){
 const navigation = useNavigation();
@@ -18,7 +19,7 @@ const navigation = useNavigation();
             <Config>Configurações de Perfil</Config>
 
             <Conteiners>
-                <Pressable onPress={()=> navigation.navigate('ProductRegistration')}>
+                <Pressable onPress={()=> navigation.navigate('')}>
                 <BlueConteiner textoForte="Alterar foto de usuário" textoFraco=""/>
                 </Pressable>
 
@@ -26,8 +27,12 @@ const navigation = useNavigation();
                 <BlueConteiner textoForte="Email" textoFraco="rayssa@gmail.br"/>
                 <BlueConteiner textoForte="Trocar de senha" textoFraco="********"/>
                 <BlueConteiner textoForte="Meus produtos" textoFraco=""/>
+                <Pressable onPress={()=> navigation.navigate('ProductRegitration')}>
+                <BlueConteiner textoForte="Novo Produto" textoFraco=""/>
+                </Pressable>
                 <BlueConteiner textoForte="Excluir conta" textoFraco=""/>
             </Conteiners>
+            <NavBar2 activeIcon="profile"/>
         </Tela>
 
     )

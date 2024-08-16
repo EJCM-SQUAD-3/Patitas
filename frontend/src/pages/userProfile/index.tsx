@@ -17,7 +17,9 @@ export default function UserProfile(){
             <ImagemPessoa source={require('../../assets/images/girl.png')}/>
             <Config>Configurações de Perfil</Config>
             <Conteiners>
+                <Pressable onPress={()=> navigation.navigate('UserProfilePhoto')}>
                 <BlueConteiner textoForte="Alterar foto de usuário" textoFraco=""/>
+                </Pressable>
                 <BlueConteiner textoForte="Alterar nome de usuário" textoFraco="Rayssa"/>
                 <BlueConteiner textoForte="Email" textoFraco="rayssa@gmail.br"/>
                 <BlueConteiner textoForte="Trocar de senha" textoFraco="********"/>

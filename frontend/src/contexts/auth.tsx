@@ -11,7 +11,7 @@ interface Data {
 
 export const AuthContext = createContext<Data>({} as Data);
 
-const AuthProvider = (props: any) => {
+export const AuthProvider = (props: any) => {
     const [authorization, setAuthorization] = useState<string>('');
     const [checkLogin, setCheckLogin] = useState<boolean>(false);
 
@@ -30,10 +30,14 @@ const AuthProvider = (props: any) => {
     }
 
     function checkIsLoggedIn() {
-        if (authorization) 
+        if (authorization != ' ') {
             setCheckLogin(true);
-        else 
+            console.log(authorization != ' ')
+        }
+        else {
+
             setCheckLogin(false);
+        }
     }
     
     useEffect(() => {
@@ -50,5 +54,3 @@ const AuthProvider = (props: any) => {
         </AuthContext.Provider>
     );
 };
-
-export default AuthProvider;

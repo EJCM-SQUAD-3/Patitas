@@ -5,6 +5,7 @@ export const Tela = styled.View`
     align-items:center;
     height: 1100px;
     flex-direction:column;
+    background-color: white;
 `
 
 export const Conteiners = styled.View`
