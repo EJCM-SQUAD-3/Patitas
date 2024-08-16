@@ -8,29 +8,31 @@ import { useEffect, useState } from "react";
 import SmallTitle from "../../components/smallTitle";
 import OrangeButton from "../../components/orangeButton";
 import { useNavigation } from "@react-navigation/native";
+import userServices, { signInData } from "../../services/userServices";
 
 type Formulario = {
-    nome: string;
-    cpf: string;
-    email: string;
-    senha: string;
-    repSenha: string;
+    repPassword: string;
 };
 
 export default function ScreenRegisterBuyer() {
     const navigation = useNavigation();
-    const { register, control, handleSubmit, formState: { errors, isValid }, setValue, getValues, reset, watch } = useForm<Formulario>({
-        defaultValues: {
-            nome: '',
-            cpf: '',
-            email: '',
-            senha: '',
-            repSenha: '',
-        },
-        mode: 'onChange', 
+
+    const { reset, control, handleSubmit, watch } = useForm<signInData & Formulario>({ 
+        defaultValues: { name: '', cpf: '', email: '', password: '', repPassword: '' } 
     });
 
-    useEffect(() => console.log('Erro: ', errors), [errors]);
+    const handleOnSubmit = ({ repPassword, ...data }: signInData & Formulario) => {
+        console.log(data);
+        reset();
+        userServices.signIn(data).then(response => {
+                if (response?.status === 201) {
+                    navigation.navigate('Login');
+                }
+            })
+            .catch(error => {
+                console.log("Action error: ", error);
+            });
+    };
 
     const [trocar, setTrocar] = useState(true);
 
@@ -38,14 +40,7 @@ export default function ScreenRegisterBuyer() {
         setTrocar(!trocar);
     }
 
-    const onSubmit = (data: Formulario) => {
-        console.log(data);
-        if (isValid) {
-            navigation.navigate('SelectUser');
-        }
-    };
-
-    const senha = watch('senha');
+    const senha = watch('password');
 
     return (
         <Tela>
@@ -54,7 +49,7 @@ export default function ScreenRegisterBuyer() {
                 <Controller
                     control={control}
                     rules={{ required: "Obrigatório!!" }}
-                    name="nome"
+                    name="name"
                     render={({ field: { value, onChange } }) => (
                         <Input secureTextEntry={false} imagem={require('../../assets/images/userIcon.png')} placeholder="Nome ..." value={value} onChangeText={onChange} />
                     )}
@@ -84,14 +79,14 @@ export default function ScreenRegisterBuyer() {
                 <Controller
                     control={control}
                     rules={{ required: "Obrigatório!!" }}
-                    name="senha"
+                    name="password"
                     render={({ field: { value, onChange } }) => (
                         <Input secureTextEntry={true} imagem={require('../../assets/images/lock.png')} placeholder="Senha ..." value={value} onChangeText={onChange} />
                     )}
                 />
                 <Controller
                     control={control}
-                    name="repSenha"
+                    name="repPassword"
                     rules={{
                         required: "Obrigatório!!",
                         validate: value => value === senha || "As senhas não coincidem."
@@ -107,7 +102,7 @@ export default function ScreenRegisterBuyer() {
                 </Pressable>
                 <Termos>Concordo com os termos</Termos>
             </TermosConteiner>
-            <OrangeButton onPress={handleSubmit(onSubmit)} texto="Entrar" />
+            <OrangeButton onPress={handleSubmit(handleOnSubmit)} texto="Entrar" />
         </Tela>
     );
 }

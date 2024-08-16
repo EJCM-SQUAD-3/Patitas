@@ -6,6 +6,9 @@ import { useNavigation, NavigationProp } from "@react-navigation/native";
 import React, { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
+import { AuthContext } from "../../contexts/auth";
+import userServices, { loginData } from "../../services/userServices";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type RootStackParamList = {
   SelectUser: undefined;
@@ -13,37 +16,30 @@ type RootStackParamList = {
   
 };
 
-type Formulario = {
-  
-  email: string;
-  senha: string;
-
-};
 
 export default function Login() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const fadeAnim = useRef(new Animated.Value(0)).current; 
 
-  const { register, control, handleSubmit, formState: { errors, isValid }, setValue, getValues, reset, watch } = useForm<Formulario>({
-    defaultValues: {
-       
-        email: '',
-        senha: '',
-      
-    },
-    mode: 'onChange', 
-});
+  const Auth = React.useContext(AuthContext);
 
-useEffect(() => console.log('Erro: ', errors), [errors]);
+  const { reset, control, handleSubmit } = useForm<loginData>({ 
+      mode: 'onChange', 
+      defaultValues: { email: '', password: '' } 
+  });
 
-const onSubmit = (data: Formulario) => {
-  console.log(data);
-  if (isValid) {
-      navigation.navigate('SelectUser');
-  }
-};
-
-const senha = watch('senha');
+  const handleOnSubmit = (data: loginData) => {
+    reset();
+    userServices.login(data).then(response => {
+        if (response?.status === 200) {
+            Auth.setToken(response?.data.token),
+            AsyncStorage.setItem('token', response?.data.token)
+        }
+    }).catch(e => {
+        console.log("Login Error: ", e);
+        alert('Login Error')
+    })
+  };
 
   useEffect(() => {
     
@@ -54,9 +50,6 @@ const senha = watch('senha');
     }).start();
   }, [fadeAnim]);
 
-
-
-
   return (
     <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
       <Tela>
@@ -65,27 +58,26 @@ const senha = watch('senha');
         <InputTitleLogin>Login</InputTitleLogin>
         <Inputs>
         <Controller
-                    control={control}
-                    rules={{ required: "Obrigatório!!" }}
-                    name="email"
-                    render={({ field: { value, onChange } }) => (
-                        <Input secureTextEntry={false} imagem={require('../../assets/images/smallCat.png')} placeholder="Email..." value={value} onChangeText={onChange} />
-                    )}
-                />
+          control={control}
+          rules={{ required: "Obrigatório!!" }}
+          name="email"
+          render={({ field: { value, onChange } }) => (
+              <Input secureTextEntry={false} imagem={require('../../assets/images/smallCat.png')} placeholder="Email..." value={value} onChangeText={onChange} />
+          )}/>
         </Inputs>
         <InputTitleSenha>Senha</InputTitleSenha>
         <Inputs>
         <Controller
                     control={control}
                     rules={{ required: "Obrigatório!!" }}
-                    name="senha"
+                    name="password"
                     render={({ field: { value, onChange } }) => (
                         <Input secureTextEntry={true} imagem={require('../../assets/images/lock.png')} placeholder="Senha..." value={value} onChangeText={onChange} />
                     )}
                 />
         </Inputs>
         <Esqueceu> Esqueceu sua senha?</Esqueceu>
-        <OrangeButton onPress={handleSubmit(onSubmit)} texto="Entrar" />
+        <OrangeButton onPress={handleSubmit(handleOnSubmit)} texto="Entrar" />
         <OrangeButton onPress={() => navigation.navigate('ScreenRegisterBuyer')} texto="Cadastrar" />
       </Tela>
     </Animated.View>

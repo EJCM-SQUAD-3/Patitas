@@ -1,7 +1,7 @@
 import { ConteinerImg, ImgVoltar, Volta, VoltarConteiner } from "./styles";
 
 
-export default function Back(){
+export default function ReturnButton(){
     return(
 
         <VoltarConteiner>

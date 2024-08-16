@@ -7,9 +7,6 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function SelectUser() {
   const navigation = useNavigation();
-  
-
-
 
   return (
    
@@ -19,8 +16,8 @@ export default function SelectUser() {
           <GataAstroImage source={require('../../assets/images/astroCat.png')} />
         </GataAstroContainer>
         <Quem>Quem é você?</Quem>
-        <Button texto="Comprador" onPress={() => navigation.navigate('Login')} />
-        <Button texto="Vendedor" onPress={() => {}} />
+        <Button texto="Comprador" onPress={() => navigation.navigate('CHome')} />
+        <Button texto="Vendedor" onPress={() => navigation.navigate('SHome')} />
       </Tela>
    
   );
