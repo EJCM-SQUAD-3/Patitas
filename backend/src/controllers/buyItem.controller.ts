@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from 'express';
+import { sendEmail } from "../config/mailer"; 
 
 const prisma = new PrismaClient();
 
@@ -9,9 +10,41 @@ class BuyItemController {
     const { orderId, productId, quantity, unitaryPrice } = req.body;
 
     try {
+    
       const newBuyItem = await prisma.buyItem.create({
-        data: { orderId, productId, quantity, unitaryPrice }
+        data: { orderId, productId, quantity, unitaryPrice } 
       });
+
+      const order = await prisma.order.findUnique({
+        where: { id: orderId },
+        include: { user: true }
+      });
+      const product = await prisma.product.findUnique({
+        where: { id: productId }
+      });
+
+      if (order && product) {
+  
+        const emailToBeSendedTo = order.user.email;
+        const subject = 'Item de Compra Adicionado';
+        const messageText = `
+          Seu item de compra foi adicionado com sucesso!
+
+          Detalhes do Pedido:
+          - Pedido ID: ${orderId}
+          - Produto: ${product.name}
+          - Quantidade: ${quantity}
+          - Preço Unitário: ${unitaryPrice}
+          - Preço Total: ${quantity * unitaryPrice}
+
+          Obrigado por comprar conosco!
+
+          Equipe Patitas.
+        `;
+
+        await sendEmail(emailToBeSendedTo, subject, messageText);
+      }
+
       return res.status(201).json(newBuyItem);
     } catch (error) {
       return res.status(500).json({ messageError: "Erro criando item de compra", error });
@@ -46,4 +79,3 @@ class BuyItemController {
 }
 
 export const buyItemController = new BuyItemController();
-
