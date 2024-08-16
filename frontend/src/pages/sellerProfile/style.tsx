@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-export const BackConteiner = styled.View`
+export const BackConteiner = styled.Pressable`
     
     margin: 20px;
     padding-right: 265px;

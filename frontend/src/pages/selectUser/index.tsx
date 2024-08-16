@@ -16,8 +16,8 @@ export default function SelectUser() {
           <GataAstroImage source={require('../../assets/images/astroCat.png')} />
         </GataAstroContainer>
         <Quem>Quem é você?</Quem>
-        <Button texto="Comprador" onPress={() => navigation.navigate('CHome')} />
-        <Button texto="Vendedor" onPress={() => navigation.navigate('SHome')} />
+        <Button texto="Comprador" onPress={() => navigation.navigate('Home')} />
+        <Button texto="Vendedor" onPress={() => navigation.navigate('Home/Vendedor')} />
       </Tela>
    
   );

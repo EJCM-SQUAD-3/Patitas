@@ -9,7 +9,7 @@ type Props ={
 
 export default function BlueConteiner ({textoForte, textoFraco}: Props){
     return(
-        <Pressable>
+        
         <ConteinerAzulClaro>
 
             <Conteiner1>
@@ -21,7 +21,7 @@ export default function BlueConteiner ({textoForte, textoFraco}: Props){
                 <SetaDireita source={require('../../assets/images/rightArrow.png')}/>
             </Conteiner2>
         </ConteinerAzulClaro>
-        </Pressable>
+        
 
     )
 

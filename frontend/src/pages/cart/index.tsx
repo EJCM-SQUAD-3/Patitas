@@ -16,9 +16,11 @@ export default function Cart(){
         <Tela>
           
             <Header/>
+            <Pressable onPress={()=> navigation.navigate('Home')}>
             <BackConteiner>
             <ReturnButton/>
             </BackConteiner>
+            </Pressable>
             <Conteiners>
                 <CartConteiner imagem={require('../../assets/images/pedigree.png')} description="Adulto - Ração Pedigree Nutrição 
 Essencial Carne para Cães Adultos" preco={160}/>
@@ -30,7 +32,7 @@ Essencial Carne para Cães Adultos" preco={90}/>
 Cores - Apolo" preco={50}/>
 
             </Conteiners>
-            <Pressable onPress={()=> navigation.navigate}>
+            <Pressable onPress={()=> navigation.navigate('AdressRegister')}>
             <BlueButton/>
             </Pressable>
             

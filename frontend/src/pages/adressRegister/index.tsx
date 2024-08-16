@@ -24,7 +24,7 @@ const navigation = useNavigation();
             <Input secureTextEntry={false} imagem={require('../../assets/images/truckIcon.png')} placeholder="Cidade ..." value={''} onChangeText={'nada'} />
             <Input secureTextEntry={false} imagem={require('../../assets/images/truckIcon.png')} placeholder="Bairro" value={''} onChangeText={'nada'} />
             </Conteiner>
-            <Pressable>
+            <Pressable onPress={()=> navigation.navigate('PurchaseCompleted')}>
             <BlueButton/>
             </Pressable>
             <NavBar activeIcon="home"/>

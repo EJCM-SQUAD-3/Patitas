@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-export const HeaderConteiner = styled.View`
+export const HeaderConteiner = styled.Pressable`
 
     width: 100%;
     height: 77px;

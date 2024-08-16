@@ -1,18 +1,19 @@
+import { ImageProps, ImageSourcePropType } from "react-native";
 import { CategoriaContainer, Imagem, Texto, BlueContainer } from "./styles";
 
-type Props = {
+type CircleProps = ImageProps & {
     texto: string;
-    imagem: any;
+    source: ImageSourcePropType
 }
 
-export default function CircleBlueCategory ({imagem, texto}: Props){
+export default function CircleBlueCategory (props: CircleProps){
 
     return(
     <CategoriaContainer>
         <BlueContainer>
-        <Imagem source={imagem} />
+        <Imagem {...props} source={props.source} />
         </BlueContainer>
-        <Texto>{texto}</Texto>
+        <Texto>{props.texto}</Texto>
     </CategoriaContainer>
     )
 }
