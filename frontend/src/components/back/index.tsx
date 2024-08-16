@@ -10,7 +10,7 @@ export default function Back(){
                 
             </ConteinerImg>
             
-            <Volta>Voltar</Volta>
+            <Volta>Voltaremos</Volta>
         </VoltarConteiner>
 
     )
