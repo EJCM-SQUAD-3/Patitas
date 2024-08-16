@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const HeaderConteiner = styled.View`
 
-    width: 100%;
+    width: 390px;
     height: 77px;
     background-color: #154962; 
     position: fixed;

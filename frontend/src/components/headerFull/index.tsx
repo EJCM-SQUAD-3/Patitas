@@ -1,23 +1,19 @@
-import { HeaderFullContainer, HeaderFullContentContainerLeft, HeaderFullContentContainerRight, IconAddress, IconCar, IconEnderecoContainer, IconSeta, Logotipo, TextAddress } from "./styles";
-
-
+import { ContainerAddress, HeaderFullContainer, HeaderFullContentContainerLeft, HeaderFullContentContainerRight, IconAddress, IconCar, IconSeta, Logotipo, TextAddress } from "./styles";
 
 export default function HeaderFull() {
 
   return (
+    <>
     <HeaderFullContainer>
-      <HeaderFullContentContainerLeft>
         <Logotipo source={require('../../assets/images/logotype.png')} />
-        <IconEnderecoContainer>
+        <ContainerAddress>
           <IconAddress source={require('../../assets/images/address.png')} />
           <TextAddress>Receber em <br></br>rua Dionísio, 72- apt 402</TextAddress>
-        </IconEnderecoContainer>
-      </HeaderFullContentContainerLeft>
-      <HeaderFullContentContainerRight>
-        <IconCar source={require('../../assets/images/carblue.png')} />
         <IconSeta source={require('../../assets/images/direction.png')} />
-      </HeaderFullContentContainerRight>
+        </ContainerAddress>
+        <IconCar source={require('../../assets/images/carblue.png')} />
     </HeaderFullContainer>
+    </>
   )
 
 }

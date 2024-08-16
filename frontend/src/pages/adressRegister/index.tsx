@@ -17,10 +17,10 @@ export default function AdressRegister(){
             </BackConteiner>
             <Endereco>Endereço</Endereco>
             <Conteiner>
-            <Input secureTextEntry={false} imagem={require('../../assets/images/blackProfileIcon.png')} placeholder="CPF ..." value={''} onChangeText={'nada'} />
-            <Input secureTextEntry={false} imagem={require('../../assets/images/cepIcon.png')} placeholder="CEP" value={''} onChangeText={'nada'} />
-            <Input secureTextEntry={false} imagem={require('../../assets/images/truckIcon.png')} placeholder="Cidade ..." value={''} onChangeText={'nada'} />
-            <Input secureTextEntry={false} imagem={require('../../assets/images/truckIcon.png')} placeholder="Bairro" value={''} onChangeText={'nada'} />
+            <Input secureTextEntry={false} imagem={require('../../assets/images/blackProfileIcon.png')} placeholder="CPF ..." />
+            <Input secureTextEntry={false} imagem={require('../../assets/images/cepIcon.png')} placeholder="CEP" />
+            <Input secureTextEntry={false} imagem={require('../../assets/images/truckIcon.png')} placeholder="Cidade ..." />
+            <Input secureTextEntry={false} imagem={require('../../assets/images/truckIcon.png')} placeholder="Bairro" />
             </Conteiner>
             <BlueButton/>
 

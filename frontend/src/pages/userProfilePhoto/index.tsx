@@ -4,7 +4,7 @@ import NavBar from "../../components/navBar";
 import OrangeButton from "../../components/orangeButton";
 import { ButtonBackContainer, FooterContainer, Page, PageContentContainer, TitleAddPhoto, } from "./styles";
 
-export default function ProductPhoto() {
+export default function userProfilePhoto() {
 
     return (
         <>
@@ -14,9 +14,9 @@ export default function ProductPhoto() {
                 </ButtonBackContainer>
 
                 <PageContentContainer>
-                    <TitleAddPhoto>Adicionar Foto do Produto</TitleAddPhoto>
+                    <TitleAddPhoto>Alterar Foto de Perfil</TitleAddPhoto>
                     <InputFile />
-                    <OrangeButton texto={"Adicionar Produto"} />
+                    <OrangeButton texto={"Baixar foto"} />
                 </PageContentContainer>
 
                 <FooterContainer>
