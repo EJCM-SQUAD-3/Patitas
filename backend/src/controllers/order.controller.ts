@@ -6,21 +6,6 @@ const prisma = new PrismaClient();
 
 class OrderController {
 
-  public async create(req: Request, res: Response) {
-    const { userId, status, items, totalPrice } = req.body;
-    try {
-      const newOrder = await prisma.order.create({
-        data: {
-          user: { connect: { id: userId } },  
-          status,
-          totalPrice,
-          items: {
-            create: items.map((item: any) => ({
-              product: { connect: { id: item.productId } },
-              quantity: item.quantity,
-              unitaryPrice: item.unitaryPrice,
-            }))
-=======
     public async create(req: Request, res: Response) {
       const { status, items, totalPrice } = req.body;
       const idUser = req.user;
