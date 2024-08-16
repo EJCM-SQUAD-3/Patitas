@@ -10,11 +10,11 @@ export default function UserProfile(){
     return(
         <Tela>
             <BackConteiner>
-            <Pressable onPress={()=> navigation.navigate('HomeBuyer')}>
+            <Pressable onPress={()=> navigation.navigate('Home')}>
             <ReturnButton/>
             </Pressable>
             </BackConteiner>
-            <ImagemPessoa source={require('../../assets/images/rayssa.png')}/>
+            <ImagemPessoa source={require('../../assets/images/girl.png')}/>
             <Config>Configurações de Perfil</Config>
             <Conteiners>
                 <BlueConteiner textoForte="Alterar foto de usuário" textoFraco=""/>

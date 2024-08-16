@@ -7,6 +7,7 @@ export const Page = styled.View`
     padding:0;
     display: flex;
     flex-direction:column;
+    background-color: white;
     
 `;
 

@@ -8,12 +8,12 @@ export default function BlueButton() {
  
  
   return (
-    <Pressable>
+    
       <Distancia>
         <BotaoContainer>
           <Texto>Finalizar Compra</Texto>
         </BotaoContainer>
       </Distancia>
-    </Pressable>
+   
   );
 }

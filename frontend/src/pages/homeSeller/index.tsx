@@ -4,6 +4,7 @@
 import CardSectionsHome from "../../components/cardSectionsHome";
 import HeaderSimple from "../../components/headerSimple";
 import NavBar from "../../components/navBar";
+import NavBar2 from "../../components/navbar2";
 import TitleSectionsHome from "../../components/titleSectionsHome";
 import { Page, PageContent, SectionHome } from "./styles";
 
@@ -27,7 +28,7 @@ export default function HomeSeller() {
                     <CardSectionsHome texto={"Ração Seca Espoleta Carne para cães ..."} valor={"75,00"} imagem={require('../../assets/images/food3.png')} />
                 </SectionHome>
             </PageContent>
-            <NavBar activeIcon="home" />
+            <NavBar2 activeIcon="home" />
         </Page>
     )
 }
