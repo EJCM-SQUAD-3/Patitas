@@ -1,17 +1,16 @@
 import { Request, Response } from "express";
 import { PrismaClient } from '@prisma/client';
 import auth from "../config/auth";
+import { sendEmail } from "../config/mailer";
 
 const prisma = new PrismaClient();
-
-
 
 class UserController {
   
   public async create(request: Request, response: Response) {
     try {
       const result = await prisma.$transaction(async (prisma) => {
-        const { name, email, password,cpf } = request.body;
+        const { name, email, password, cpf } = request.body;
         const { hash, salt } = auth.generatePassword(password);
 
         const newUser = await prisma.user.create({
@@ -23,12 +22,30 @@ class UserController {
             cpf,
           },
         });
+        
+        const subject = "Boas-Vindas ao Patitas!";
+        const messageText = `
+          Olá ${newUser.name},
+
+          Seja bem-vindo ao Patitas, o aplicativo mais completo para você e seu pet!
+
+          Estamos felizes em tê-lo conosco. A partir de agora, você pode aproveitar todas as funcionalidades que preparamos especialmente para você.
+
+          Caso tenha alguma dúvida ou precise de ajuda, nossa equipe está à disposição.
+
+          Atenciosamente,
+          Equipe Patitas
+        `;
+
+        await sendEmail(newUser.email, subject, messageText);
+        
         const userId = newUser.id;
         const newSeller = await prisma.seller.create({
-          data:{
+          data: {
             userId
           }
         });
+
         return response.status(201).json({ 
           message: "Usuário comprador e vendedor criado com sucesso",
           user: newUser,
@@ -44,22 +61,22 @@ class UserController {
     }
   }
 
-  public async login (request: Request, response: Response) {
+  public async login(request: Request, response: Response) {
     try {
-        const { email, password } = request.body;
-        const user = await prisma.user.findUnique({ where: { email: email } });
-        if (!user)
-            return response.status(404).json({ message: 'User not found' });
+      const { email, password } = request.body;
+      const user = await prisma.user.findUnique({ where: { email: email } });
+      if (!user)
+        return response.status(404).json({ message: 'Usuário não encontrado' });
 
-        if (auth.checkPassword(password, user.hash, user.salt))
-            return response.status(200).json({ token: auth.generateJWT(user) });
-        else 
-            return response.status(401).json({ message: 'Invalid Password' });
+      if (auth.checkPassword(password, user.hash, user.salt))
+        return response.status(200).json({ token: auth.generateJWT(user) });
+      else 
+        return response.status(401).json({ message: 'Senha inválida' });
     } catch (error) {
-        return response.status(500).json({ 
-            messageError: "Server Internal Error",
-            error: error
-        });
+      return response.status(500).json({ 
+        messageError: "Erro interno no servidor",
+        error: error
+      });
     }
   }
 
@@ -73,7 +90,8 @@ class UserController {
           seller: {
             include: {
               products: true
-          }},
+            }
+          },
           order: true,
           cart: true,
           favorites: true,
@@ -137,40 +155,35 @@ class UserController {
       });
       return res.status(200).json(user);
     } catch (error) {
-      return res.status(500).json({ messageError: "Error atualizando", error });
+      return res.status(500).json({ messageError: "Erro atualizando o usuário", error });
     }
   }
 
-  public async updatePassword(req: Request, res: Response){
+  public async updatePassword(req: Request, res: Response) {
     const id = req.user;
-    const {password} = req.body;
+    const { password } = req.body;
     const { hash, salt } = auth.generatePassword(password);
 
-    try{
+    try {
       const user = await prisma.user.update({
-        where: {id: Number(id)},
-        data: {
-          hash,
-          salt,
-        },
+        where: { id: Number(id) },
+        data: { hash, salt },
       });
       return res.status(200).json(user);
-    }
-    catch(error){
-      return res.status(500).json({messageError: "Erro atualizando a senha", error})
+    } catch (error) {
+      return res.status(500).json({ messageError: "Erro atualizando a senha", error });
     }
   }
 
-  public async delete(request: Request, response: Response){
+  public async delete(request: Request, response: Response) {
     const id = request.user;
-    try{
+    try {
       const user = await prisma.user.delete({
-        where: {id: Number(id)}
+        where: { id: Number(id) }
       });
       return response.status(200).json(user);
-    }
-    catch(error){
-      return response.status(500).json({error: error});
+    } catch (error) {
+      return response.status(500).json({ error: error });
     }
   }  
 

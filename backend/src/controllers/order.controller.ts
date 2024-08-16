@@ -1,9 +1,26 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from 'express';
+import { sendEmail } from "../config/mailer";
 
 const prisma = new PrismaClient();
 
 class OrderController {
+
+  public async create(req: Request, res: Response) {
+    const { userId, status, items, totalPrice } = req.body;
+    try {
+      const newOrder = await prisma.order.create({
+        data: {
+          user: { connect: { id: userId } },  
+          status,
+          totalPrice,
+          items: {
+            create: items.map((item: any) => ({
+              product: { connect: { id: item.productId } },
+              quantity: item.quantity,
+              unitaryPrice: item.unitaryPrice,
+            }))
+=======
     public async create(req: Request, res: Response) {
       const { status, items, totalPrice } = req.body;
       const idUser = req.user;
@@ -17,23 +34,24 @@ class OrderController {
               create: items.map((item: any) => ({
                 product: { connect: { id: item.productId } },
                 quantity: item.quantity,
-                unitaryPrice: item.unitaryPrice, // Inclua o unitaryPrice aqui
+                unitaryPrice: item.unitaryPrice, 
               }))
             }
-          }
-        });
-        return res.status(201).json({
-          message: "Pedido criado com sucesso",
-          order: newOrder,
-        });
-      } catch (error) {
-        console.error("Erro ao criar pedido:", error);
-        return res.status(500).json({
-          messageError: "Erro criando pedido",
-        });
-      }
-    }
 
+          }
+        }
+      });
+      return res.status(201).json({
+        message: "Pedido criado com sucesso",
+        order: newOrder,
+      });
+    } catch (error) {
+      console.error("Erro ao criar pedido:", error);
+      return res.status(500).json({
+        messageError: "Erro criando pedido",
+      });
+    }
+  }
 
   public async readAll(req: Request, res: Response) {
     try {
@@ -70,6 +88,18 @@ class OrderController {
           }
         }
       });
+
+      if (order) {
+        const emailToBeSendedTo = order.user.email;
+        const subject = 'Confirmação de Pedido';
+        const itemsList = order.items.map(item => 
+          `Produto: ${item.product.name}\nQuantidade: ${item.quantity}\nPreço Unitário: ${item.unitaryPrice}\n`
+        ).join('\n');
+        const messageText = `Seu pedido foi criado com sucesso!\n\nDetalhes do Pedido:\nTotal: ${order.totalPrice}\nItens:\n${itemsList}\n Patitas`;
+
+        await sendEmail(emailToBeSendedTo, subject, messageText);
+      }
+
       return res.status(200).json(order);
     } catch (error) {
       return res.status(500).json({
@@ -90,6 +120,15 @@ class OrderController {
         data: {
           status,
           totalPrice,
+          items: {
+            update: items.map((item: any) => ({
+              where: { id: item.id }, 
+              data: {
+                quantity: item.quantity,
+                unitaryPrice: item.unitaryPrice
+              }
+            }))
+          }
         },
         include: {
           user: true,
@@ -112,4 +151,3 @@ class OrderController {
 }
 
 export const orderController = new OrderController();
-
